@@ -56,13 +56,14 @@ export async function POST(req: Request) {
 
 
   if(eventType === "user.created") {
-    const {id, first_name, emailAddresses, imageUrl} = evt.data
+    const {id, email_addresses, first_name, image_url} = evt.data
+    evt.data.email_addresses
     const user = {
       id: id,
-      email: emailAddresses[0].emailAddress,
+      email: email_addresses[0].email_address,
       age: null,
       name: first_name ?? '',
-      image: imageUrl ?? '' 
+      image: image_url ?? '' 
     }
       await db.insert(users).values(
       user
