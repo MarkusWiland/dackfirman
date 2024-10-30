@@ -3,7 +3,6 @@
 import db from "@/db";
 import { Ad, users } from "@/db/schema/index";
 import { eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
 
 export const getAllUsers = async () => {
   const data = await db.select().from(users);
