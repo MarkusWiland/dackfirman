@@ -57,7 +57,7 @@ export async function POST(req: Request) {
 
   if(eventType === "user.created") {
     const {id, email_addresses, first_name, image_url} = evt.data
-    evt.data.email_addresses
+ 
     const user = {
       id: id,
       email: email_addresses[0].email_address,
