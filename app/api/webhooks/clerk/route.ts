@@ -4,6 +4,7 @@ import { auth, currentUser, WebhookEvent } from '@clerk/nextjs/server'
 import db from '@/db'
 import { users } from '@/db/schema'
 import { NextResponse } from 'next/server'
+import { eq } from 'drizzle-orm'
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
