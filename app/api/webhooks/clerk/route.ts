@@ -6,6 +6,7 @@ import { createUser } from "@/lib/users";
 import db from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -72,10 +73,12 @@ export async function POST(req: Request) {
       name: first_name ?? "",
       image: image_url,
     };
-    const dbUser = db.select().from(users).where(eq(users.id, id));
-    if (!dbUser) {
-      await createUser(user);
-    }
+    
+     await createUser(user);
+
+     return NextResponse.json({message:  "New user created"})
+ 
+    
   }
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
   console.log("Webhook body:", body);
