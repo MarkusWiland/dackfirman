@@ -25,7 +25,7 @@ interface ComboboxDemoProps {
   onSelect: (value: string) => void;
 }
 
-export function ComboboxDemo({ lists, title, onSelect }) {
+export function ComboboxDemo({ lists, title, onSelect } : ComboboxDemoProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 

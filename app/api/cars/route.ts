@@ -37,6 +37,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(results);
   } catch (error) {
-    return NextResponse.json({ error: "Något gick fel med databasfrågan" }, { status: 500 });
+    return NextResponse.json({ error: error,  }, { status: 500 });
   }
 }
