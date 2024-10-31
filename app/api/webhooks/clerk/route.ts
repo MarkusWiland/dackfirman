@@ -72,7 +72,7 @@ export async function POST(req: Request) {
       name: first_name ?? "",
       image: image_url,
     };
-    let dbUser = db.select().from(users).where(eq(users.id, id));
+    const dbUser = db.select().from(users).where(eq(users.id, id));
     if (!dbUser) {
       await createUser(user);
     }
