@@ -5,6 +5,7 @@ import db from '@/db'
 import { users } from '@/db/schema'
 import { NextResponse } from 'next/server'
 import { eq } from 'drizzle-orm'
+import { createUser } from '@/lib/users'
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -54,29 +55,23 @@ export async function POST(req: Request) {
   // For this guide, you simply log the payload to the console
   const { id } = evt.data
   const eventType = evt.type
-  if(evt.type === "user.created") {
-    const {userId} = await auth();
-    const user = await currentUser();
-    if ( !userId) {
-      throw new Error("Something went wrong");
+  if(eventType === "user.created") {
+    const {id, email_addresses, first_name, image_url} = evt.data
+
+    if(!id || !email_addresses) {
+      return new Response("Error", {
+        status: 400
+      })
     }
-  
-    // Kontrollera om användaren redan finns i databasen
-    const dbUser = await db.select().from(users).where(eq(users.id, userId));
-  
-    if (dbUser.length === 0) { // Om användaren inte finns
-     await db.insert(users).values({
-        id: userId,
-        name: user?.firstName ?? "",
-        age: null,
-        email: user?.emailAddresses[0].emailAddress ?? "",
-        image: user?.imageUrl ?? "",
-      });
-  
-     
+
+    const user = {
+      userId: id,
+      email: email_addresses[0].email_address,
+      name: first_name,
+      image: image_url,
+      age:null,
     }
-  
-    return NextResponse.redirect("http://localhost:3000");
+    await createUser(user)
   }
   console.log(`Webhook with and ID of ${id} and type of ${eventType}`)
   console.log('Webhook body:', body)
