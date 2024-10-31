@@ -15,6 +15,13 @@
       "when": 1730277763175,
       "tag": "0001_broad_thing",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1730297082540,
+      "tag": "0002_sharp_praxagora",
+      "breakpoints": true
     }
   ]
 }
