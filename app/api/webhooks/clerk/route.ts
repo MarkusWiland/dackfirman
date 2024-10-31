@@ -1,10 +1,7 @@
 import { Webhook } from 'svix'
 import { headers } from 'next/headers'
-import { auth, currentUser, WebhookEvent } from '@clerk/nextjs/server'
-import db from '@/db'
-import { users } from '@/db/schema'
-import { NextResponse } from 'next/server'
-import { eq } from 'drizzle-orm'
+import { WebhookEvent } from '@clerk/nextjs/server'
+
 import { createUser } from '@/lib/users'
 
 export async function POST(req: Request) {
