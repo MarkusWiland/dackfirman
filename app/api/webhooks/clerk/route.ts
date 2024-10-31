@@ -3,9 +3,7 @@ import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 
 import { createUser } from "@/lib/users";
-import db from "@/db";
-import { users } from "@/db/schema";
-import { eq } from "drizzle-orm";
+
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
