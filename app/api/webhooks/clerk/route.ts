@@ -66,7 +66,6 @@ export async function POST(req: Request) {
       email: email_addresses[0].email_address,
       name: first_name ?? "",
       image: image_url,
-      age:null,
     }
     await createUser(user)
   }

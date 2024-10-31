@@ -2,8 +2,8 @@ import db from "@/db"
 import { users } from "@/db/schema"
 interface User {
   userId: string;
-  name: string | null;
-  age: number | null;
+  name: string,
+
   image: string;
   email: string;
 }
